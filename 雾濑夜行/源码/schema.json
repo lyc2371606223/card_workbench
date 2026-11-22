@@ -1,0 +1,267 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "系统": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "日期": {
+          "default": "1979/11/01",
+          "type": "string"
+        },
+        "时间": {
+          "default": "17:30",
+          "type": "string"
+        },
+        "当前区域": {
+          "default": "老城区",
+          "type": "string",
+          "enum": [
+            "商业区",
+            "港口区",
+            "工业区",
+            "新城区",
+            "老城区",
+            "外围郊区"
+          ]
+        },
+        "当前场景": {
+          "default": "",
+          "type": "string"
+        },
+        "天气": {
+          "default": "浓雾",
+          "type": "string",
+          "enum": [
+            "浓雾",
+            "晴",
+            "阴",
+            "雨"
+          ]
+        },
+        "剧情阶段": {
+          "default": "日常",
+          "type": "string",
+          "enum": [
+            "日常",
+            "异动初现",
+            "多方角力",
+            "危机逼近",
+            "决战收束"
+          ]
+        },
+        "传闻与线索": {
+          "default": [],
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "主角": {
+      "default": {},
+      "type": "object",
+      "properties": {
+        "身份": {
+          "default": "自定义",
+          "type": "string",
+          "enum": [
+            "朝雾凉",
+            "藤崎诗织",
+            "木村津奈",
+            "新田爱姬",
+            "游马凛",
+            "端木舞",
+            "自定义"
+          ]
+        },
+        "姓名": {
+          "default": "",
+          "type": "string"
+        },
+        "评级": {
+          "default": "",
+          "type": "string"
+        },
+        "状态": {
+          "default": "健康",
+          "type": "string",
+          "enum": [
+            "健康",
+            "轻伤",
+            "负伤",
+            "重伤"
+          ]
+        },
+        "体力": {
+          "default": 100,
+          "type": "number"
+        },
+        "阵营倾向": {
+          "default": 0,
+          "type": "number"
+        },
+        "元素能量": {
+          "default": {},
+          "type": "object",
+          "properties": {
+            "上限": {
+              "default": 0,
+              "type": "number"
+            },
+            "当前值": {
+              "default": 0,
+              "type": "number"
+            }
+          }
+        },
+        "性开发": {
+          "default": {},
+          "type": "object",
+          "propertyNames": {
+            "type": "string",
+            "enum": [
+              "口",
+              "穴",
+              "肛",
+              "手",
+              "足",
+              "胸"
+            ]
+          },
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "开发程度": {
+                "default": "未开发",
+                "type": "string"
+              },
+              "使用次数": {
+                "default": 0,
+                "type": "number"
+              },
+              "初次性对象": {
+                "default": "未知",
+                "type": "string"
+              },
+              "最近性对象": {
+                "default": "未知",
+                "type": "string"
+              }
+            }
+          },
+          "required": [
+            "口",
+            "穴",
+            "肛",
+            "手",
+            "足",
+            "胸"
+          ]
+        }
+      }
+    },
+    "关系": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string"
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "好感度": {
+            "default": 0,
+            "type": "number"
+          },
+          "性欲": {
+            "default": 0,
+            "type": "number"
+          },
+          "关系": {
+            "default": "陌生",
+            "type": "string"
+          },
+          "体力": {
+            "default": 100,
+            "type": "number"
+          },
+          "元素能量": {
+            "default": {},
+            "type": "object",
+            "properties": {
+              "上限": {
+                "default": 0,
+                "type": "number"
+              },
+              "当前值": {
+                "default": 0,
+                "type": "number"
+              }
+            }
+          },
+          "性行为次数": {
+            "default": 0,
+            "type": "number"
+          },
+          "初次性对象": {
+            "default": "未知",
+            "type": "string"
+          },
+          "最近性对象": {
+            "default": "未知",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "在场": {
+      "default": {},
+      "type": "object",
+      "propertyNames": {
+        "type": "string",
+        "enum": [
+          "角色A",
+          "角色B",
+          "角色C"
+        ]
+      },
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "名": {
+            "default": "",
+            "type": "string"
+          },
+          "好感": {
+            "default": 0,
+            "type": "number"
+          },
+          "性欲": {
+            "default": 0,
+            "type": "number"
+          },
+          "服装": {
+            "default": "",
+            "type": "string"
+          },
+          "心事": {
+            "default": "",
+            "type": "string"
+          },
+          "身体": {
+            "default": "",
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "角色A",
+        "角色B",
+        "角色C"
+      ]
+    }
+  }
+}

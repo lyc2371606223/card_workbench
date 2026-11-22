@@ -1,0 +1,50 @@
+export const Schema = z.object({
+  系统: z.object({
+    日期: z.string().prefault('1979/11/01'),
+    时间: z.string().prefault('17:30'),
+    当前区域: z.enum(['商业区', '港口区', '工业区', '新城区', '老城区', '外围郊区']).prefault('老城区'),
+    当前场景: z.string().prefault(''),
+    天气: z.enum(['浓雾', '晴', '阴', '雨']).prefault('浓雾'),
+    剧情阶段: z.enum(['日常', '异动初现', '多方角力', '危机逼近', '决战收束']).prefault('日常'),
+    传闻与线索: z.array(z.string()).prefault([]).transform(v => v.slice(-10)),
+  }).prefault({}),
+  主角: z.object({
+    身份: z.enum(['朝雾凉', '藤崎诗织', '木村津奈', '新田爱姬', '游马凛', '端木舞', '自定义']).prefault('自定义'),
+    姓名: z.string().prefault(''),
+    评级: z.string().prefault(''),
+    状态: z.enum(['健康', '轻伤', '负伤', '重伤']).prefault('健康'),
+    体力: z.coerce.number().prefault(100).transform(v => _.clamp(v, 0, 100)),
+    阵营倾向: z.coerce.number().prefault(0).transform(v => _.clamp(v, -100, 100)),
+    元素能量: z.object({
+      上限: z.coerce.number().prefault(0),
+      当前值: z.coerce.number().prefault(0),
+    }).prefault({}),
+    性开发: z.record(z.enum(['口', '穴', '肛', '手', '足', '胸']), z.object({
+      开发程度: z.string().prefault('未开发'),
+      使用次数: z.coerce.number().prefault(0),
+      初次性对象: z.string().prefault('未知'),
+      最近性对象: z.string().prefault('未知'),
+    })).prefault({}),
+  }).prefault({}),
+  关系: z.record(z.string(), z.object({
+    好感度: z.coerce.number().prefault(0),
+    性欲: z.coerce.number().prefault(0),
+    关系: z.string().prefault('陌生'),
+    体力: z.coerce.number().prefault(100),
+    元素能量: z.object({
+      上限: z.coerce.number().prefault(0),
+      当前值: z.coerce.number().prefault(0),
+    }).prefault({}),
+    性行为次数: z.coerce.number().prefault(0),
+    初次性对象: z.string().prefault('未知'),
+    最近性对象: z.string().prefault('未知'),
+  })).prefault({}),
+  在场: z.record(z.enum(['角色A', '角色B', '角色C']), z.object({
+    名: z.string().prefault(''),
+    好感: z.coerce.number().prefault(0),
+    性欲: z.coerce.number().prefault(0),
+    服装: z.string().prefault(''),
+    心事: z.string().prefault(''),
+    身体: z.string().prefault(''),
+  })).prefault({}),
+});
