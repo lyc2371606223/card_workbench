@@ -16,6 +16,8 @@ export const Schema = z.object({
     体力: z.coerce.number().prefault(100).transform(v => _.clamp(v, 0, 100)),
     阵营倾向: z.coerce.number().prefault(0).transform(v => _.clamp(v, -100, 100)),
     外观: z.string().prefault(''),
+    受孕状态: z.string().prefault('未受孕'),
+    出产次数: z.coerce.number().prefault(0),
     元素能量: z.object({
       上限: z.coerce.number().prefault(0),
       当前值: z.coerce.number().prefault(0),
@@ -39,6 +41,8 @@ export const Schema = z.object({
     性行为次数: z.coerce.number().prefault(0),
     初次性对象: z.string().prefault('未知'),
     最近性对象: z.string().prefault('未知'),
+    受孕状态: z.string().prefault('未受孕'),
+    出产次数: z.coerce.number().prefault(0),
   })).prefault({}),
   在场: z.record(z.enum(['角色A', '角色B', '角色C']), z.object({
     名: z.string().prefault(''),

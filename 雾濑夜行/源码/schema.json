@@ -107,6 +107,14 @@
           "default": "",
           "type": "string"
         },
+        "受孕状态": {
+          "default": "未受孕",
+          "type": "string"
+        },
+        "出产次数": {
+          "default": 0,
+          "type": "number"
+        },
         "元素能量": {
           "default": {},
           "type": "object",
@@ -217,6 +225,14 @@
           "最近性对象": {
             "default": "未知",
             "type": "string"
+          },
+          "受孕状态": {
+            "default": "未受孕",
+            "type": "string"
+          },
+          "出产次数": {
+            "default": 0,
+            "type": "number"
           }
         }
       }

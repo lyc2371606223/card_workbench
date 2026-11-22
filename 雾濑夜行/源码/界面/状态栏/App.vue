@@ -29,6 +29,14 @@
           <span class="v">{{ 主角.外观 || '—' }}</span>
         </div>
         <div class="stat-row">
+          <span class="k">受孕状态</span>
+          <span class="v">{{ 主角.受孕状态 || '未受孕' }}</span>
+        </div>
+        <div class="stat-row">
+          <span class="k">出产次数</span>
+          <span class="v">{{ 主角.出产次数 || 0 }}</span>
+        </div>
+        <div class="stat-row">
           <span class="k">体力</span>
           <span class="v">{{ 主角.体力 }}/100</span>
         </div>
@@ -120,6 +128,8 @@
             <div class="stat-row" v-if="v.性行为次数 > 0"><span class="k">性行为</span><span class="v">{{ v.性行为次数 }} 次</span></div>
             <div class="stat-row" v-if="v.初次性对象 && v.初次性对象 !== '未知'"><span class="k">初次对象</span><span class="v">{{ v.初次性对象 }}</span></div>
             <div class="stat-row" v-if="v.最近性对象 && v.最近性对象 !== '未知'"><span class="k">最近对象</span><span class="v">{{ v.最近性对象 }}</span></div>
+            <div class="stat-row" v-if="v.受孕状态 && v.受孕状态 !== '未受孕'"><span class="k">受孕</span><span class="v">{{ v.受孕状态 }}</span></div>
+            <div class="stat-row" v-if="v.出产次数 > 0"><span class="k">出产</span><span class="v">{{ v.出产次数 }} 次</span></div>
           </div>
         </div>
         <div class="empty" v-else>暂无关系记录</div>
