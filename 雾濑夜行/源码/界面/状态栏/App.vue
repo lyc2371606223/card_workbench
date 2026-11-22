@@ -25,6 +25,10 @@
           </span>
         </div>
         <div class="stat-row">
+          <span class="k">外观</span>
+          <span class="v">{{ 主角.外观 || '—' }}</span>
+        </div>
+        <div class="stat-row">
           <span class="k">体力</span>
           <span class="v">{{ 主角.体力 }}/100</span>
         </div>
@@ -84,17 +88,17 @@
         <span class="arrow">▾</span>
       </button>
       <div class="sec-body" v-if="open.在场">
-        <div class="grid-2">
-          <div class="card" v-for="(v, k) in 在场" :key="k" v-if="v.名">
+        <div class="grid-2" v-if="在场列表.length">
+          <div class="card" v-for="[k, v] in 在场列表" :key="k">
             <div class="name">{{ v.名 }}</div>
             <div class="stat-row"><span class="k">好感</span><span class="v">{{ v.好感 }}</span></div>
             <div class="stat-row"><span class="k">性欲</span><span class="v">{{ v.性欲 }}</span></div>
-            <div class="stat-row"><span class="k">服装</span><span class="v">{{ v.服装 || '—' }}</span></div>
+            <div class="stat-row"><span class="k">外观</span><span class="v">{{ v.外观 || '—' }}</span></div>
             <div class="stat-row"><span class="k">心事</span><span class="v">{{ v.心事 || '—' }}</span></div>
             <div class="stat-row"><span class="k">身体</span><span class="v">{{ v.身体 || '—' }}</span></div>
           </div>
         </div>
-        <div class="empty" v-if="!在场有人">暂无在场角色</div>
+        <div class="empty" v-else>暂无在场角色</div>
       </div>
     </section>
 
@@ -133,9 +137,8 @@ const store = useDataStore();
 const sys = computed(() => store.data?.系统 ?? {});
 const 主角 = computed(() => store.data?.主角 ?? {});
 const 性开发 = computed(() => store.data?.主角?.性开发 ?? {});
-const 在场 = computed(() => store.data?.在场 ?? {});
+const 在场列表 = computed(() => Object.entries(store.data?.在场 ?? {}).filter(([, v]) => v && (v as any).名));
 const 关系列表 = computed(() => Object.entries(store.data?.关系 ?? {}));
-const 在场有人 = computed(() => Object.values(在场.value).some((v: any) => v && v.名));
 
 const open = reactive<Record<string, boolean>>({ 主角: true, 性开发: false, 传闻与线索: false, 在场: false, 关系: false });
 

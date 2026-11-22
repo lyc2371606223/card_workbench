@@ -15,6 +15,7 @@ export const Schema = z.object({
     状态: z.enum(['健康', '轻伤', '负伤', '重伤']).prefault('健康'),
     体力: z.coerce.number().prefault(100).transform(v => _.clamp(v, 0, 100)),
     阵营倾向: z.coerce.number().prefault(0).transform(v => _.clamp(v, -100, 100)),
+    外观: z.string().prefault(''),
     元素能量: z.object({
       上限: z.coerce.number().prefault(0),
       当前值: z.coerce.number().prefault(0),
@@ -43,7 +44,7 @@ export const Schema = z.object({
     名: z.string().prefault(''),
     好感: z.coerce.number().prefault(0),
     性欲: z.coerce.number().prefault(0),
-    服装: z.string().prefault(''),
+    外观: z.string().prefault(''),
     心事: z.string().prefault(''),
     身体: z.string().prefault(''),
   })).prefault({}),

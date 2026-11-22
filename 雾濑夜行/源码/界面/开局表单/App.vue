@@ -91,7 +91,7 @@ async function 提交() {
   store.data.主角.评级 = 评级战力[评级.value] ?? 评级.value;
   store.data.主角.状态 = '健康';
   store.data.主角.体力 = 100;
-  store.data.主角.阵营倾向 = 0;
+  store.data.主角.阵营倾向 = 60;
   store.data.主角.元素能量 = { 上限: upper, 当前值: upper };
   store.data.主角.性开发 = {
     口: { 开发程度: '未开发', 使用次数: 0, 初次性对象: '未知', 最近性对象: '未知' },

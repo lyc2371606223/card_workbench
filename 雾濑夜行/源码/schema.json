@@ -103,6 +103,10 @@
           "default": 0,
           "type": "number"
         },
+        "外观": {
+          "default": "",
+          "type": "string"
+        },
         "元素能量": {
           "default": {},
           "type": "object",
@@ -243,7 +247,7 @@
             "default": 0,
             "type": "number"
           },
-          "服装": {
+          "外观": {
             "default": "",
             "type": "string"
           },
