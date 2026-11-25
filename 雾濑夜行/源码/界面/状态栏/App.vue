@@ -12,30 +12,16 @@
     <!-- 主角 -->
     <section class="sec">
       <button class="sec-head" :class="{ open: open.主角 }" @click="open.主角 = !open.主角">
-        <span>主角 · {{ 主角.姓名 || 主角.身份 }}</span>
+        <span>主角 · {{ 主角.姓名 || '—' }}</span>
         <span class="arrow">▾</span>
       </button>
       <div class="sec-body" v-if="open.主角">
-        <div class="stat-row"><span class="k">身份</span><span class="v">{{ 主角.身份 }}</span></div>
-        <div class="stat-row"><span class="k">评级</span><span class="v">{{ 主角.评级 || '—' }}</span></div>
-        <div class="stat-row">
-          <span class="k">状态</span>
-          <span class="v">
-            <span class="badge" :class="状态badge(主角.状态)">{{ 主角.状态 }}</span>
-          </span>
-        </div>
-        <div class="stat-row">
-          <span class="k">外观</span>
-          <span class="v">{{ 主角.外观 || '—' }}</span>
-        </div>
-        <div class="stat-row">
-          <span class="k">受孕状态</span>
-          <span class="v">{{ 主角.受孕状态 || '未受孕' }}</span>
-        </div>
-        <div class="stat-row">
-          <span class="k">出产次数</span>
-          <span class="v">{{ 主角.出产次数 || 0 }}</span>
-        </div>
+        <div class="stat-row"><span class="k">身份</span><span class="v">{{ 主角.身份 || '—' }}</span></div>
+        <div class="stat-row"><span class="k">年龄</span><span class="v">{{ 主角.年龄 || '—' }}</span></div>
+        <div class="stat-row"><span class="k">实力</span><span class="v">{{ 主角.实力 || '—' }}</span></div>
+        <div class="stat-row"><span class="k">持有物</span><span class="v">{{ 主角.持有物 || '—' }}</span></div>
+        <div class="stat-row"><span class="k">外观</span><span class="v">{{ 主角.外观 || '—' }}</span></div>
+        <div class="stat-row"><span class="k">秘密</span><span class="v">{{ 主角.秘密 || '—' }}</span></div>
         <div class="stat-row">
           <span class="k">体力</span>
           <span class="v">{{ 主角.体力 }}/100</span>
@@ -63,6 +49,10 @@
         <span class="arrow">▾</span>
       </button>
       <div class="sec-body" v-if="open.性开发">
+        <div class="stat-row"><span class="k">性欲</span><span class="v">{{ 主角.性欲 || 0 }}</span></div>
+        <div class="stat-row"><span class="k">性癖</span><span class="v">{{ 主角.性癖 || '—' }}</span></div>
+        <div class="stat-row"><span class="k">受孕状态</span><span class="v">{{ 主角.受孕状态 || '未受孕' }}</span></div>
+        <div class="stat-row"><span class="k">出产次数</span><span class="v">{{ 主角.出产次数 || 0 }}</span></div>
         <div class="organ-grid">
           <div class="organ" v-for="(v, k) in 性开发" :key="k">
             <div class="o-name">{{ k }}</div>
@@ -99,11 +89,10 @@
         <div class="grid-2" v-if="在场列表.length">
           <div class="card" v-for="[k, v] in 在场列表" :key="k">
             <div class="name">{{ v.名 }}</div>
-            <div class="stat-row"><span class="k">好感</span><span class="v">{{ v.好感 }}</span></div>
-            <div class="stat-row"><span class="k">性欲</span><span class="v">{{ v.性欲 }}</span></div>
             <div class="stat-row"><span class="k">外观</span><span class="v">{{ v.外观 || '—' }}</span></div>
-            <div class="stat-row"><span class="k">心事</span><span class="v">{{ v.心事 || '—' }}</span></div>
             <div class="stat-row"><span class="k">身体</span><span class="v">{{ v.身体 || '—' }}</span></div>
+            <div class="stat-row"><span class="k">体力</span><span class="v">{{ v.体力 }}</span></div>
+            <div class="stat-row" v-if="v.元素能量 && v.元素能量.上限 > 0"><span class="k">元素</span><span class="v">{{ v.元素能量.当前值 }}/{{ v.元素能量.上限 }}</span></div>
           </div>
         </div>
         <div class="empty" v-else>暂无在场角色</div>
@@ -120,16 +109,16 @@
         <div class="grid-2" v-if="关系列表.length">
           <div class="card" v-for="[name, v] in 关系列表" :key="name">
             <div class="name">{{ name }}</div>
+            <div class="stat-row"><span class="k">年龄</span><span class="v">{{ v.年龄 || '—' }}</span></div>
             <div class="stat-row"><span class="k">关系</span><span class="v">{{ v.关系 }}</span></div>
             <div class="stat-row"><span class="k">好感</span><span class="v">{{ v.好感度 }}</span></div>
-            <div class="stat-row"><span class="k">性欲</span><span class="v">{{ v.性欲 }}</span></div>
-            <div class="stat-row"><span class="k">体力</span><span class="v">{{ v.体力 }}</span></div>
-            <div class="stat-row" v-if="v.元素能量 && v.元素能量.上限 > 0"><span class="k">元素</span><span class="v">{{ v.元素能量.当前值 }}/{{ v.元素能量.上限 }}</span></div>
-            <div class="stat-row" v-if="v.性行为次数 > 0"><span class="k">性行为</span><span class="v">{{ v.性行为次数 }} 次</span></div>
-            <div class="stat-row" v-if="v.初次性对象 && v.初次性对象 !== '未知'"><span class="k">初次对象</span><span class="v">{{ v.初次性对象 }}</span></div>
-            <div class="stat-row" v-if="v.最近性对象 && v.最近性对象 !== '未知'"><span class="k">最近对象</span><span class="v">{{ v.最近性对象 }}</span></div>
+            <div class="stat-row" v-if="已知(v, '实力')"><span class="k">实力</span><span class="v">{{ v.实力 }}</span></div>
+            <div class="stat-row" v-if="已知(v, '性经历')"><span class="k">性行为</span><span class="v">{{ v.性行为次数 }} 次</span></div>
+            <div class="stat-row" v-if="已知(v, '性经历') && v.初次性对象 && v.初次性对象 !== '未知'"><span class="k">初次对象</span><span class="v">{{ v.初次性对象 }}</span></div>
+            <div class="stat-row" v-if="已知(v, '性经历') && v.最近性对象 && v.最近性对象 !== '未知'"><span class="k">最近对象</span><span class="v">{{ v.最近性对象 }}</span></div>
+            <div class="stat-row" v-if="已知(v, '性癖')"><span class="k">性癖</span><span class="v">{{ v.性癖 }}</span></div>
             <div class="stat-row" v-if="v.受孕状态 && v.受孕状态 !== '未受孕'"><span class="k">受孕</span><span class="v">{{ v.受孕状态 }}</span></div>
-            <div class="stat-row" v-if="v.出产次数 > 0"><span class="k">出产</span><span class="v">{{ v.出产次数 }} 次</span></div>
+            <div class="stat-row" v-if="已知(v, '出产') && v.出产次数 > 0"><span class="k">出产</span><span class="v">{{ v.出产次数 }} 次</span></div>
           </div>
         </div>
         <div class="empty" v-else>暂无关系记录</div>
@@ -173,9 +162,8 @@ function 阵营badge(v: number) {
   return 'neutral';
 }
 
-function 状态badge(v: string) {
-  if (v === '健康') return '';
-  if (v === '重伤') return 'danger';
-  return 'neutral';
+function 已知(v: any, cat: string) {
+  const 已知值 = v?.已知 || '';
+  return 已知值.split(/[,，]/).map((s: string) => s.trim()).includes(cat);
 }
 </script>
